@@ -1,27 +1,78 @@
 # ng-navigator-share
 
-Lightweight Angular library to share PWA apps, Text, URL using Web Share API
+Lightweight Angular wrapper on Web Share API to share PWA apps, Text, URL.
 
-## Development server
+## Why ng-navigator-share?
+This library will save you from checking and writing all the cases for [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share), if ```Navigator.share()``` API is available in your browser or not. So instead of writing all that, you can use this wrapper.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Demo
 
-## Code scaffolding
+Check the ng-navigator-share in action, [click here](https://ng-navigator-share-b75a7.firebaseapp.com/).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Installation
+You can use either the npm or yarn command-line tool to install packages. Use whichever is appropriate for your project in the examples below.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+#### NPM
+```  
+npm install --save ng-navigator-share
+```
+        
+#### YARN
+```          
+yarn add --save ng-navigator-share
+```
 
-## Running unit tests
+## Usage
+Follow below steps to add multi level list in your project
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### 1. Import ```NgNavigatorShareService``` in your component class
 
-## Running end-to-end tests
+You need to import the ```NgNavigatorShareService``` in your component class, where you want to use it. Then use the ```this.ngNavigatorShareService.share()``` method, which will return Promise as shown below.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```typescript        
+import { Component } from '@angular/core';
 
-## Further help
+import { NgNavigatorShareService } from 'ng-navigator-share';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  private ngNavigatorShareService: NgNavigatorShareService;
+  constructor(
+    ngNavigatorShareService: NgNavigatorShareService
+  ) {
+    this.ngNavigatorShareService = ngNavigatorShareService;
+  }
+  title = 'app';
+  share() {
+    this.ngNavigatorShareService.share({
+      title: 'My Awesome app',
+      text: 'hey check out my Share button',
+      url: 'https://developers.google.com/web'
+    }).then( (response) => {
+      console.log(response);
+    })
+    .catch( (error) => {
+      console.log(error);
+    });
+  }
+}
+```  
+#### 2. In your Markup
+```html        
+<u>
+  <strong (click)='share()'>share</strong>
+</u>
+```
+
+## Contribution
+
+I welcome you to fork and add more features into it. If you have any bugs or feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-navigator-share/issues).
+
+## Leicense
+
+MIT
