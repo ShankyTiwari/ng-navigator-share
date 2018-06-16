@@ -1,8 +1,27 @@
 {
   "name": "ng-navigator-share",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShankyTiwari/ng-navigator-share.git"
+  },
+  "keywords": [
+    "Angular2",
+    "Angular4",
+    "Angular6",
+    "Angular",
+    "web-navigator-share",
+    "web-share-api",
+    "pwa-share"
+  ],
+  "author": "Shashank Tiwari <shashank@codershood.info>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShankyTiwari/ng-navigator-share/issues"
   }
 }
