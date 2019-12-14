@@ -1,3 +1,7 @@
-<u>
-  <strong (click)='share()'>share</strong>
-</u>
+<div class="cover-bg">
+  <h1 *ngIf="!isMobileDevice">You are on Desktop Browser, Open this site in mobile & click the below <b>share</b> Button
+  </h1>
+  <div class="share-button" (click)='share()'> Share </div>
+  <span>developed by </span><a target="_blank" href="https://www.codershood.info/">www.codershood.info</a>
+</div>
+
