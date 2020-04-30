@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/web-navigator-share-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -29,6 +30,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -132,7 +139,8 @@
           "configurations": {
             "production": {
               "project": "projects/ng-navigator-share/ng-package.prod.json"
-            }
+            ,              "tsConfig": "projects/ng-navigator-share/tsconfig.lib.prod.json"
+}
           }
         },
         "test": {

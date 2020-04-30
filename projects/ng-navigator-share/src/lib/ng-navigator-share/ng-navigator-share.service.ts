@@ -9,6 +9,10 @@ export class NgNavigatorShareService {
     this.webNavigator = window.navigator;
   }
 
+  canShare(): boolean {
+    return this.webNavigator !== null && this.webNavigator.share !== undefined;
+  }
+
   share({ title, text, url }: { title: string, text?: string, url?: string }) {
     return new Promise(async (resolve, reject) => {
       if (this.webNavigator !== null && this.webNavigator.share !== undefined) {
