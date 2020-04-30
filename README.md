@@ -49,6 +49,12 @@ export class AppComponent {
   }
   title = 'app';
   share() {
+    
+    if (!this.ngNavigatorShareService.canShare()) {
+      alert(`This service/api is not supported in your Browser`);
+      return;
+    }
+
     this.ngNavigatorShareService.share({
       title: 'My Awesome app',
       text: 'hey check out my Share button',
