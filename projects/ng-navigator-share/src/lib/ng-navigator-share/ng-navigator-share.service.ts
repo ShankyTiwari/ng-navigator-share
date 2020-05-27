@@ -13,7 +13,11 @@ export class NgNavigatorShareService {
     return this.webNavigator !== null && this.webNavigator.share !== undefined;
   }
 
-  share({ title, text, url }: { title: string, text?: string, url?: string }) {
+  canShareFile(file: []): boolean {
+    return this.webNavigator !== null && this.webNavigator.share !== undefined && this.webNavigator.canShare({ files: file });
+  }
+
+  share({ title, text, url, files }: { title: string, text?: string, url?: string, files?: any[] }) {
     return new Promise(async (resolve, reject) => {
       if (this.webNavigator !== null && this.webNavigator.share !== undefined) {
         if (
@@ -23,18 +27,22 @@ export class NgNavigatorShareService {
           console.warn(`text and url both can't be empty, at least provide either text or url`);
         } else {
           try {
-            const isShared = await this.webNavigator.share({
-              title: title,
-              text: text,
-              url: url,
-            });
+            const shareObject: ShareObject = {
+                title,
+                text,
+                url
+            };
+            if (files && files.length !== 0) {
+                shareObject.files = files;
+            }
+            const isShared = await this.webNavigator.share(shareObject);
             resolve({
               shared: true
             });
           } catch (error) {
             reject({
               shared: false,
-              error: error
+              error
             });
           }
         }
@@ -46,4 +54,11 @@ export class NgNavigatorShareService {
       }
     });
   }
+}
+
+interface ShareObject {
+  title: string;
+  text: string;
+  url: string;
+  files?: any[];
 }
